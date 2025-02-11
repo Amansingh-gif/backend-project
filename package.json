@@ -1,0 +1,17 @@
+{
+  "name": "backend-youtube",
+  "version": "1.0.0",
+  "description": "a professional setup of backend project",
+  "keywords": [
+    "javascript",
+    "backend",
+    "Aman"
+  ],
+  "license": "ISC",
+  "author": "Aman Singh Naruka",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
