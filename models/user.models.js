@@ -26,7 +26,7 @@ fullname:{
  },
 avatar :{
     type:String,//cloudinary url
-    required:yes
+    required:true
 },
 coverimage:{
     type:String //cloudinary url
