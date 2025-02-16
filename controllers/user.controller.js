@@ -40,7 +40,7 @@ const registerUser= asynchandler( async (req,res)=>{
  // const coverimagelocalpath=req.files?.coverimage[0]?.path;
     //condition if you dont want to send the coverimage
     //the code still works
-    
+
     let coverimagelocalpath;
     if (req.files && Array.isArray(req.files.coverimage) && req.files.coverimage.length >0 ) {
         coverimagelocalpath=req.files.coverimage[0].path
