@@ -34,10 +34,19 @@ const registerUser= asynchandler( async (req,res)=>{
   if(existed){
     throw new ApiError(409,"user with email and username already exist")
   }
-  console.log("Uploaded Files:", req.files);
+ console.log(req.files);
 
   const avatarlocalpath=req.files?.avatar[0]?.path;
-  const coverimagelocalpath=req.files?.coverimage[0]?.path;
+ // const coverimagelocalpath=req.files?.coverimage[0]?.path;
+    //condition if you dont want to send the coverimage
+    //the code still works
+    
+    let coverimagelocalpath;
+    if (req.files && Array.isArray(req.files.coverimage) && req.files.coverimage.length >0 ) {
+        coverimagelocalpath=req.files.coverimage[0].path
+    }
+
+
   if(!avatarlocalpath){
     throw new ApiError(400,"avatar image could not find")
   }
@@ -55,15 +64,17 @@ const registerUser= asynchandler( async (req,res)=>{
   username:username.toLowerCase(),
   password
   })
-  const createduser=  User.findById(user._id).select(
+  const createduser =  await User.findById(user._id).select(
     "-password -refreshtoken"
   )
   if(!createduser){
     throw new ApiError(500,"something went wrong while registering the user")
   }
 
+
+
 return res.status(201).json(
-    new ApiResponse(200,"user created successfully")
+    new ApiResponse(200,createduser,"user created successfully")
 );
 
 })
