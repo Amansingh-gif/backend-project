@@ -98,7 +98,7 @@ const loginUser=asynchandler( async (req,res)=>{
  // access token and refresh token
  // stores in cookies
   const {username ,email,password} = req.body;
-      if(!username || email ){
+      if(!username && email ){
        throw new ApiError(400," requires either email or username")
       }
     const user = await User.findOne({
