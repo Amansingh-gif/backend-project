@@ -90,7 +90,6 @@ try {
     throw new ApiError(500,"something went wrong while generating and refreshingtoken")
 }
 }
-
 const loginUser=asynchandler( async (req,res)=>{
 // req- data
  //user check or email check
@@ -135,7 +134,28 @@ return res
 
 
 })
+
+const logoutUser=asynchandler(async(req,res)=>{
+ await User.findByIdAndUpdate(req.user._id
+    ,{
+        $set:{
+            refreshtoken:undefined
+        }
+    },{
+        new:true
+    })
+
+    const options={
+        httpOnly:true,
+        secure:true
+    }
+    return res.status(200)
+    .clearCookie("accesstoken",options)
+    .clearCookie("refrestoken",options)
+    .json(new ApiResponse(200,{},"user logged out successfully"))
+})
 export {
     registerUser,
-    loginUser
+    loginUser,
+    logoutUser
 }
